@@ -1,2 +1,17 @@
 @import 'tailwindcss';
 @plugin "daisyui";
+
+@font-face {
+  font-family: Playfair;
+  src: url(./assets/fonts/PlayfairDisplay.ttf);
+}
+
+@font-face {
+  font-family: WorkSans;
+  src: url(./assets/fonts/WorkSans.ttf);
+}
+
+@theme {
+  --font-playfair: 'Playfair', 'sans-serif';
+  --font-worksans: 'WorkSans', 'sans-serif';
+}
