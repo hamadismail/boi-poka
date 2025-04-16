@@ -1,13 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router';
+import List from './List';
+
+const listData = [
+  { id: 1, name: 'Home', path: '/' },
+  { id: 2, name: 'Listed Books', path: '/books' },
+  { id: 3, name: 'Pages to read', path: '/pages' },
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
-  const handleLinkClick = () => {
-    setIsOpen(false);
-  };
+  const lists = listData.map(list => (
+    <List key={list.id} list={list} setIsOpen={setIsOpen}></List>
+  ));
 
   useEffect(() => {
     const handleClickOutside = e => {
@@ -21,24 +27,6 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
-  const links = (
-    <>
-      <li>
-        <NavLink onClick={handleLinkClick} to="/">
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink onClick={handleLinkClick} to="/books">
-          Listed Books
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/pages">Pages to read</NavLink>
-      </li>
-    </>
-  );
 
   return (
     <div className="navbar bg-base-100 shadow-sm font-worksans">
@@ -67,14 +55,14 @@ const Navbar = () => {
           </div>
           {isOpen && (
             <ul className="menu menu-sm bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow absolute">
-              {links}
+              {lists}
             </ul>
           )}
         </div>
         <a className="btn btn-ghost text-xl">Boi Poka</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
+        <ul className="menu menu-horizontal px-1">{lists}</ul>
       </div>
       <div className="navbar-end">
         <a className="btn mr-2 bg-green-600 text-white rounded-lg">Sign In</a>
