@@ -5,13 +5,13 @@ const Books = () => {
   const [books, setBooks] = useState(null);
 
   useEffect(() => {
-    fetch('booksData.json')
+    fetch('/booksData.json')
       .then(res => res.json())
       .then(data => setBooks(data));
   }, []);
 
   if (!books) {
-    return <div className="text-center">Loading...</div>;
+    return <h1>Loading...</h1>;
   }
 
   return (

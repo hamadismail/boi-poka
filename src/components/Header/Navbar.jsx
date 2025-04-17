@@ -7,6 +7,13 @@ const listData = [
   { id: 3, name: 'Pages to read', path: '/pages' },
 ];
 
+const btns = (
+  <>
+    <a className="btn mr-2 bg-green-600 text-white rounded-lg">Sign In</a>
+    <a className="btn bg-sky-600 text-white rounded-lg">Sign Up</a>
+  </>
+);
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
@@ -57,18 +64,16 @@ const Navbar = () => {
             {isOpen && (
               <ul className="menu menu-sm bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow absolute">
                 {lists}
+                <div>{btns}</div>
               </ul>
             )}
           </div>
-          <a className="btn btn-ghost text-xl">Boi Poka</a>
+          <a className="btn btn-ghost text-2xl">Boi Poka</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{lists}</ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn mr-2 bg-green-600 text-white rounded-lg">Sign In</a>
-          <a className="btn bg-sky-500 text-white rounded-lg">Sign Up</a>
-        </div>
+        <div className="hidden lg:navbar-end">{btns}</div>
       </div>
     </div>
   );

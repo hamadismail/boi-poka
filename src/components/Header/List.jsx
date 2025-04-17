@@ -3,7 +3,7 @@ import { NavLink } from 'react-router';
 
 const List = ({ list, setIsOpen }) => {
   return (
-    <li>
+    <li className="text-lg font-medium">
       <NavLink onClick={() => setIsOpen(false)} to={list.path}>
         {list.name}
       </NavLink>
