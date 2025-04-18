@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 const BookList = () => {
   const books = useLoaderData();
   const [readlist, setReadlist] = useState([]);
+  const [dropdown, setDropdown] = useState(false);
 
   useEffect(() => {
     const data = getLocalStorage();
@@ -35,14 +36,31 @@ const BookList = () => {
     toast.warn('Removed From The List');
   };
 
+  const handleSort = type => {
+    if (type === 'pages') {
+      const sortByPage = [...readlist].sort(
+        (a, b) => b.totalPages - a.totalPages
+      );
+      setReadlist(sortByPage);
+    }
+
+    if (type === 'rating') {
+      const sortByRating = [...readlist].sort((a, b) => b.rating - a.rating);
+      setReadlist(sortByRating);
+    }
+
+    setDropdown(false);
+  };
+
   return (
     <div className="w-11/12 mx-auto">
       <h1 className="py-8 bg-gray-300 my-8 rounded-lg text-center font-bold text-xl">
         Books
       </h1>
       <div className="flex justify-center mb-8">
-        <div className="dropdown dropdown-center">
+        <div className="menu">
           <div
+            onClick={() => setDropdown(!dropdown)}
             tabIndex={0}
             role="button"
             className="btn m-1 bg-green-600 text-white"
@@ -64,17 +82,19 @@ const BookList = () => {
               />
             </svg>
           </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-          >
-            <li>
-              <a>Rating</a>
-            </li>
-            <li>
-              <a>Pages</a>
-            </li>
-          </ul>
+          {dropdown && (
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li onClick={() => handleSort('rating')}>
+                <a>Rating</a>
+              </li>
+              <li onClick={() => handleSort('pages')}>
+                <a>Pages</a>
+              </li>
+            </ul>
+          )}
         </div>
       </div>
 

@@ -25,7 +25,7 @@ const Readlist = ({ book, handleRemoveList }) => {
       <div className="max-md:mt-4 font-worksans grow">
         <h1 className="font-playfair text-xl font-semibold">{bookName}</h1>
         <p className="font-medium text-gray-600">By: {author}</p>
-        <p className="my-2 flex gap-4 items-center">
+        <p className="my-2 md:flex gap-4 items-center">
           <b>Tags:</b>{' '}
           <span className="px-2 py-1 bg-gray-100 text-green-600 rounded-2xl">
             #{tags[0]}
@@ -37,7 +37,7 @@ const Readlist = ({ book, handleRemoveList }) => {
             <MapPin className="w-5" /> Year of Publishing: {yearOfPublishing}
           </span>
         </p>
-        <p className="text-gray-600 flex gap-4">
+        <p className="text-gray-600 md:flex gap-4">
           <span className="flex gap-2">
             <Users className="w-5" />
             Publisher: {publisher}
@@ -46,25 +46,29 @@ const Readlist = ({ book, handleRemoveList }) => {
             <BookOpenText className="w-5" /> Page {totalPages}
           </span>
         </p>
-        <p className="mt-2 pt-4 border-t border-gray-300 w-full flex items-center gap-2 font-medium text-sm">
-          <span className="px-4 py-2 rounded-2xl bg-sky-100 text-sky-500">
-            Category: {category}
-          </span>{' '}
-          <span className="px-4 py-2 rounded-2xl bg-yellow-50 text-yellow-400">
-            Rating: {rating}
-          </span>{' '}
-          <span
-            onClick={() => navigate(`/book/${book.bookId}`)}
-            className="cursor-pointer border-none px-4 py-2 rounded-2xl bg-green-100 text-green-600"
-          >
-            View Details
-          </span>
-          <span
-            onClick={() => handleRemoveList(book.bookId)}
-            className="cursor-pointer border-none px-4 py-2 rounded-2xl bg-red-100 text-red-600"
-          >
-            Remove List
-          </span>
+        <p className="mt-2 pt-4 border-t border-gray-300 w-full md:flex items-center gap-2 font-medium text-sm">
+          <div className="flex gap-2 max-md:mb-2">
+            <p className="px-4 py-2 rounded-2xl bg-sky-100 text-sky-500">
+              Category: {category}
+            </p>{' '}
+            <p className="px-4 py-2 rounded-2xl bg-yellow-50 text-yellow-400">
+              Rating: {rating}
+            </p>{' '}
+          </div>
+          <div className="flex gap-2">
+            <p
+              onClick={() => navigate(`/book/${book.bookId}`)}
+              className="cursor-pointer border-none px-4 py-2 rounded-2xl bg-green-100 text-green-600"
+            >
+              View Details
+            </p>
+            <p
+              onClick={() => handleRemoveList(book.bookId)}
+              className="cursor-pointer border-none px-4 py-2 rounded-2xl bg-red-100 text-red-600"
+            >
+              Remove List
+            </p>
+          </div>
         </p>
       </div>
     </div>
