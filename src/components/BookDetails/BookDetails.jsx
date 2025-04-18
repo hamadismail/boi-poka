@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import './bookdetails.css';
+import { getLocalStorage, setLocalstorage } from '../../utilities/localStorage';
 
 const BookDetails = () => {
   const { bookId } = useParams();
@@ -21,6 +22,16 @@ const BookDetails = () => {
     publisher,
     yearOfPublishing,
   } = book;
+
+  const handleReadlist = id => {
+    const readlist = getLocalStorage();
+
+    if (readlist.includes(id)) {
+      alert('already exsited');
+    } else {
+      setLocalstorage(id);
+    }
+  };
 
   return (
     <div className="w-11/12 mx-auto my-8 flex justify-center">
@@ -63,7 +74,9 @@ const BookDetails = () => {
             </div>
           </div>
           <div className="flex gap-4 mt-4">
-            <button className="btn">Read</button>
+            <button onClick={() => handleReadlist(bookId)} className="btn">
+              Read
+            </button>
             <button className="btn bg-sky-600 text-white">Wishlist</button>
           </div>
         </div>

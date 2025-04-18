@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Readlist from '../../components/Readlist/Readlist';
 import { useLoaderData } from 'react-router';
+import {
+  getLocalStorage,
+  removeLocalStorage,
+} from '../../utilities/localStorage';
 
 const BookList = () => {
   const books = useLoaderData();
+  const [readlist, setReadlist] = useState([]);
+
+  useEffect(() => {
+    const data = getLocalStorage();
+    const readlistIds = data.map(id => parseInt(id));
+    const readlistItem = [];
+
+    for (const id of readlistIds) {
+      const readlists = books.find(book => book.bookId === id);
+      readlists && readlistItem.push(readlists);
+    }
+
+    setReadlist(readlistItem);
+  }, []);
+
+  const handleRemoveList = id => {
+    const remainingList = readlist.filter(read => read.bookId !== id);
+    setReadlist(remainingList);
+
+    removeLocalStorage(id);
+  };
 
   return (
     <div className="w-11/12 mx-auto">
@@ -59,8 +84,12 @@ const BookList = () => {
 
           <TabPanel>
             <div>
-              {books.map(book => (
-                <Readlist key={book.bookId} book={book}></Readlist>
+              {readlist.map(book => (
+                <Readlist
+                  key={book.bookId}
+                  book={book}
+                  handleRemoveList={handleRemoveList}
+                ></Readlist>
               ))}
             </div>
           </TabPanel>

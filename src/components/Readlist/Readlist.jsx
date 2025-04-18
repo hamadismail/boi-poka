@@ -1,7 +1,7 @@
 import { BookOpenText, MapPin, Users } from 'lucide-react';
 import React from 'react';
 
-const Readlist = ({ book }) => {
+const Readlist = ({ book, handleRemoveList }) => {
   const {
     bookName,
     author,
@@ -52,6 +52,12 @@ const Readlist = ({ book }) => {
           </span>{' '}
           <span className="cursor-pointer border-none px-4 py-2 rounded-2xl bg-green-100 text-green-600">
             View Details
+          </span>
+          <span
+            onClick={() => handleRemoveList(book.bookId)}
+            className="cursor-pointer border-none px-4 py-2 rounded-2xl bg-red-100 text-red-600"
+          >
+            Remove List
           </span>
         </p>
       </div>
