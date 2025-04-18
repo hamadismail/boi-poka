@@ -7,6 +7,7 @@ import {
   getLocalStorage,
   removeLocalStorage,
 } from '../../utilities/localStorage';
+import { ToastContainer, toast } from 'react-toastify';
 
 const BookList = () => {
   const books = useLoaderData();
@@ -30,6 +31,8 @@ const BookList = () => {
     setReadlist(remainingList);
 
     removeLocalStorage(id);
+
+    toast.warn('Removed From The List');
   };
 
   return (
@@ -92,6 +95,7 @@ const BookList = () => {
                 ></Readlist>
               ))}
             </div>
+            <ToastContainer position="bottom-right"></ToastContainer>
           </TabPanel>
           <TabPanel>
             <h2>Any content 2</h2>

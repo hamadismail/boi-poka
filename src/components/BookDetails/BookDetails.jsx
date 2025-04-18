@@ -2,6 +2,7 @@ import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import './bookdetails.css';
 import { getLocalStorage, setLocalstorage } from '../../utilities/localStorage';
+import { ToastContainer, toast } from 'react-toastify';
 
 const BookDetails = () => {
   const { bookId } = useParams();
@@ -27,16 +28,17 @@ const BookDetails = () => {
     const readlist = getLocalStorage();
 
     if (readlist.includes(id)) {
-      alert('already exsited');
+      toast.error('Already Exist in The Reading List');
     } else {
       setLocalstorage(id);
+      toast.success('Added To The Reading List');
     }
   };
 
   return (
     <div className="w-11/12 mx-auto my-8 flex justify-center">
       <div className="md:flex gap-12 font-worksans">
-        <div className="flex-[4] p-12 bg-gray-200 flex justify-center items-center rounded-lg">
+        <div className="flex-[4] px-8 bg-gray-200 flex justify-center items-center rounded-lg">
           <img className="card-img" width="250px" src={image} />
         </div>
         <div className="flex-[6] max-md:mt-4">
@@ -47,7 +49,11 @@ const BookDetails = () => {
           </p>
           <p>
             <b>Review : </b>
-            <span className="text-sm">{review}</span>
+            <span className="text-sm">
+              {review.split(' ').length > 40
+                ? review.split(' ').slice(0, 40).join(' ') + '...'
+                : review}
+            </span>
           </p>
           <p className="my-4 border-b pb-4 border-gray-300">
             <b>Tag</b>
@@ -77,6 +83,7 @@ const BookDetails = () => {
             <button onClick={() => handleReadlist(bookId)} className="btn">
               Read
             </button>
+            <ToastContainer position="bottom-right"></ToastContainer>
             <button className="btn bg-sky-600 text-white">Wishlist</button>
           </div>
         </div>
