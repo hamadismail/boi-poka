@@ -46,7 +46,7 @@ const Readlist = ({ book, handleRemoveList }) => {
             <BookOpenText className="w-5" /> Page {totalPages}
           </span>
         </p>
-        <p className="mt-2 pt-4 border-t border-gray-300 w-full md:flex items-center gap-2 font-medium text-sm">
+        <div className="mt-2 pt-4 border-t border-gray-300 w-full md:flex items-center gap-2 font-medium text-sm">
           <div className="flex gap-2 max-md:mb-2">
             <p className="px-4 py-2 rounded-2xl bg-sky-100 text-sky-500">
               Category: {category}
@@ -69,7 +69,7 @@ const Readlist = ({ book, handleRemoveList }) => {
               Remove List
             </p>
           </div>
-        </p>
+        </div>
       </div>
     </div>
   );
